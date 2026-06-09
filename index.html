@@ -21,6 +21,8 @@
             <input type="color" id="txt-color" name="txt-color" value="#000000" oninput="onTxtColorChange(this.value)"/>
             <button class="increase-txt" onclick="onIncreaseTxt()">A+</button>
             <button class="decrease-txt" onclick="onDecreaseTxt()">A-</button>
+            <button class="add-line" onclick="onAddLine()">Add Line</button>
+            <button class="next-line" onclick="onNextLine()">Next Line</button>
 
         </div>
         
@@ -30,7 +32,7 @@
     </section> 
 
     <script src="js/services/util.service.js"></script>
-    <script src="js/services/image.service.js"></script>
+    <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
     <script src="js/gallery.controller.js"></script>
@@ -43,7 +45,7 @@
             
             if (elGalleryToggle) {
                 elToggleView.innerText = 'Gallery'
-                renderMeme()
+                onInit()
             } else elToggleView.innerText = 'Editor'
         }
     </script>

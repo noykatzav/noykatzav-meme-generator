@@ -8,25 +8,37 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     
     renderMeme()
+    renderEdit()
 }
 
-function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
+function renderMeme() {
     const meme = getMeme()
-    if (meme) imgSrc = getImgById(meme.selectedImgId).url
+    if (!meme) return
+        
+    //get image
+    const imgSrc = getImgById(meme.selectedImgId).url
 
     const elImg = new Image()
     elImg.src = imgSrc
 
-    let txt, size, color
-
-    if (meme.lines.length > 0) ({ txt, size, color } = meme.lines[meme.selectedLineIdx])           
-    
+        
     elImg.onload = () => {
+        //render image
         coverCanvasWithImg(elImg)
-        drawText(txt, gElCanvas.width / 2, 10, color, size)
+
+        //render text
+        meme.lines.reduce((acc, line, idx)=> { 
+            let { txt, size, color } = line
+
+            var isSelected = meme.selectedLineIdx===idx
+
+            drawTextLine(txt, gElCanvas.width / 2, acc, color, isSelected, size)
+
+            acc += size + 20
+            return acc
+            
+        }, 10)
     }
-    
-    renderTxtEdit()
 }
 
 function coverCanvasWithImg(elImg) {
@@ -34,28 +46,33 @@ function coverCanvasWithImg(elImg) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function drawText(text, x, y, txtColor='black', txtSize=30) {
-	gCtx.lineWidth = 2
-	gCtx.strokeStyle = txtColor
-
+function drawTextLine(text, x, y, txtColor='black', isSelected=false, txtSize=30) {
+	gCtx.lineWidth = 1
+    
 	gCtx.fillStyle = txtColor
-
-	gCtx.font = txtSize + 'px Arial'
+    
+	gCtx.font = `bold ${txtSize}px Arial`
 	gCtx.textAlign = 'center'
 	gCtx.textBaseline = 'top'
-
+    
 	gCtx.fillText(text, x, y)
-	gCtx.strokeText(text, x, y)
+    
+    if (isSelected) {
+        gCtx.strokeStyle = 'yellow'
+        gCtx.strokeText(text, x, y)
+    }
 }
 
-function renderTxtEdit() {
+function renderEdit() {
     const meme = getMeme()
-    let txt = ''
     
-    if (meme.lines.length > 0) txt = meme.lines[meme.selectedLineIdx].txt
+    const {txt, color} = meme.lines[meme.selectedLineIdx]
 
-    const elTxtEdit = document.querySelector('.txt-edit')
-    if (txt) elTxtEdit.value = txt
+    const elTxtInput = document.querySelector('.txt-edit')
+    const elTxtColor = document.querySelector('[name="txt-color"]')
+    
+    elTxtInput.value = txt
+    elTxtColor.value = color
 }
 
 function handleTxtEdit(event) {
@@ -71,13 +88,34 @@ function onTxtColorChange(color) {
 }
 
 function onIncreaseTxt() {
-    setLineTxtSize(+2)
+    setLineSize(+2)
     renderMeme()
 }
 
 function onDecreaseTxt() {
-    setLineTxtSize(-2)
+    setLineSize(-2)
     renderMeme()
+}
+
+function onAddLine() {
+    addLine()
+    
+    setSelectedLineIdx(getMeme().lines.length - 1)
+    renderMeme()
+    renderEdit()
+}
+
+function onNextLine() {  
+    const meme =  getMeme() 
+    const linesLen =  meme.lines.length
+    var nextLineIdx = meme.selectedLineIdx + 1
+
+    if (nextLineIdx === linesLen) nextLineIdx = 0
+
+    setSelectedLineIdx(nextLineIdx)
+
+    renderMeme()
+    renderEdit()
 }
 
 function onDownloadMeme(elLink) {
