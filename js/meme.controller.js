@@ -10,15 +10,19 @@ function onInit() {
     renderMeme()
 }
 
-
-
 function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
+    const meme = getMeme()
+    
+    if (meme) imgSrc = getImgById(meme.selectedImgId).url
+
     const elImg = new Image()
     elImg.src = imgSrc
 
+    var {txt, size, color} = meme.lines[meme.selectedLineIdx]
+
     elImg.onload = () => {
         coverCanvasWithImg(elImg)
-        drawText('Text 1', gElCanvas.width / 2, 30, 'top')
+        drawText(txt, gElCanvas.width / 2, 10, color, size, 'top')
     }
 }
 
@@ -27,15 +31,15 @@ function coverCanvasWithImg(elImg) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function drawText(text, x, y, baseline='middle') {
+function drawText(text, x, y, txtColor='black', txtSize=30, baseline='middle') {
 	gCtx.lineWidth = 2
-	// gCtx.strokeStyle = 'black'
+	gCtx.strokeStyle = txtColor
 
-	gCtx.fillStyle = 'black'
+	gCtx.fillStyle = txtColor
 
-	gCtx.font = '30px Arial'
+	gCtx.font = txtSize + 'px Arial'
 	gCtx.textAlign = 'center'
-	gCtx.textBaseline = 'middle'
+	gCtx.textBaseline = baseline
 
 	gCtx.fillText(text, x, y)
 	gCtx.strokeText(text, x, y)
