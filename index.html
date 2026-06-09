@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="styles/main.css">
     <title>Meme Generator</title>                                 
 </head>
-<body>
+<body onload="onInit()">
     <header>Meme Generator</header>
-    <section class="editor"></section>  
+    <section class="editor">
+        <canvas height="400"></canvas>
+    </section>  
     <section class="gallery"></section> 
 
     <script src="js/services/util.service.js"></script>
