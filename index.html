@@ -7,16 +7,21 @@
     <title>Meme Generator</title>                                 
 </head>
 <body onload="onInit()">
-    <header>Meme Generator</header>
-    <section class="editor">
+    <header>Meme Generator
+        <button class="toggle-view" onclick="onToggleSections()">Editor</button>
+    </header>
+    <section class="editor hidden">
         <div class="canvas-container">            
             <canvas height="400"></canvas>
+            <a href="#" class="download-meme" onclick="onDownloadMeme(this)" download="my-meme.jpg">Download Meme</a>
         </div>
-
+        
         <div class="meme-editor">
             <input type="text" class="txt-edit" placeholder="Meme text" oninput="handleTxtEdit(event)">
         </div>
+        
     </section>  
+    
     <section class="gallery">
     </section> 
 
@@ -25,5 +30,18 @@
     <script src="js/services/meme.service.js"></script>
     <script src="js/meme.controller.js"></script>
     <script src="js/gallery.controller.js"></script>
+    
+    <script>
+        function onToggleSections() {
+            var elGalleryToggle = document.querySelector('.gallery').classList.toggle('hidden')
+            var elEditorToggle = document.querySelector('.editor').classList.toggle('hidden')
+            const elToggleView = document.querySelector('.toggle-view')
+            
+            if (elGalleryToggle) elToggleView.innerText = 'Gallery'
+            else if (elEditorToggle) elToggleView.innerText = 'Editor'
+        }
+    </script>
+
+
 </body>
 </html>

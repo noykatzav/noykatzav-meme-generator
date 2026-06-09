@@ -7,6 +7,10 @@ body {
     text-align: center;
 }
 
+.canvas-container {
+    display: grid;
+}
+
 canvas {
     background-color: white;
 }
@@ -20,6 +24,10 @@ canvas {
     display: grid;
     grid-auto-flow: column;
     gap: 10px;
+}
+
+.hidden {
+    display: none;
 }
 
 
