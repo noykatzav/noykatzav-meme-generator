@@ -8,13 +8,18 @@ body {
 }
 
 canvas {
-    /* display: block; */
     background-color: white;
 }
 
 .editor {
     display: grid;
     grid-auto-flow: column;
+}
+
+.gallery {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
 }
 
 

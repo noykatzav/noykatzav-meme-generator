@@ -12,7 +12,6 @@ function onInit() {
 
 function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
     const meme = getMeme()
-    
     if (meme) imgSrc = getImgById(meme.selectedImgId).url
 
     const elImg = new Image()
