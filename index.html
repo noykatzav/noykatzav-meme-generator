@@ -18,6 +18,10 @@
         
         <div class="meme-editor">
             <input type="text" class="txt-edit" placeholder="Meme text" oninput="handleTxtEdit(event)">
+            <input type="color" id="txt-color" name="txt-color" value="#000000" oninput="onTxtColorChange(this.value)"/>
+            <button class="increase-txt" onclick="onIncreaseTxt()">A+</button>
+            <button class="decrease-txt" onclick="onDecreaseTxt()">A-</button>
+
         </div>
         
     </section>  
@@ -37,8 +41,10 @@
             var elEditorToggle = document.querySelector('.editor').classList.toggle('hidden')
             const elToggleView = document.querySelector('.toggle-view')
             
-            if (elGalleryToggle) elToggleView.innerText = 'Gallery'
-            else if (elEditorToggle) elToggleView.innerText = 'Editor'
+            if (elGalleryToggle) {
+                elToggleView.innerText = 'Gallery'
+                renderMeme()
+            } else elToggleView.innerText = 'Editor'
         }
     </script>
 

@@ -7,14 +7,6 @@ body {
     text-align: center;
 }
 
-.canvas-container {
-    display: grid;
-}
-
-canvas {
-    background-color: white;
-}
-
 .editor {
     display: grid;
     grid-auto-flow: column;
@@ -24,6 +16,19 @@ canvas {
     display: grid;
     grid-auto-flow: column;
     gap: 10px;
+}
+
+.meme-editor {
+    display: grid;
+    gap: 5px;
+}
+
+.canvas-container {
+    display: grid;
+}
+
+canvas {
+    background-color: white;
 }
 
 .hidden {

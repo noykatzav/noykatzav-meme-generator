@@ -22,13 +22,25 @@ function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
-function setImg(imgId) {
+function setLineTxtSize(sizeInc) {
+    gMeme.lines[gMeme.selectedLineIdx].size += sizeInc
+}
+
+function setLineColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function setImg(imgId=1) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
-        lines: []
-    }
-    
-    // place holder - after working on layout should be removed
-    renderMeme()
+        lines: [
+            {
+                txt: 'Text 1',
+                size: 20,
+                color: 'black'
+            }   
+        ]
+    }    
 }
+

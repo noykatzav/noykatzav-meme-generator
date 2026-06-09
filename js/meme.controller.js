@@ -17,8 +17,7 @@ function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
     const elImg = new Image()
     elImg.src = imgSrc
 
-    let txt = 'Text 1'
-    let size, color
+    let txt, size, color
 
     if (meme.lines.length > 0) ({ txt, size, color } = meme.lines[meme.selectedLineIdx])           
     
@@ -51,7 +50,7 @@ function drawText(text, x, y, txtColor='black', txtSize=30) {
 
 function renderTxtEdit() {
     const meme = getMeme()
-    let txt = 'Text 1'
+    let txt = ''
     
     if (meme.lines.length > 0) txt = meme.lines[meme.selectedLineIdx].txt
 
@@ -63,6 +62,21 @@ function handleTxtEdit(event) {
     const txt = event.target.value
     
     setLineTxt(txt)
+    renderMeme()
+}
+
+function onTxtColorChange(color) {
+    setLineColor(color)
+    renderMeme()
+}
+
+function onIncreaseTxt() {
+    setLineTxtSize(+2)
+    renderMeme()
+}
+
+function onDecreaseTxt() {
+    setLineTxtSize(-2)
     renderMeme()
 }
 
