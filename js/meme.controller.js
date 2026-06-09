@@ -17,13 +17,16 @@ function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
     const elImg = new Image()
     elImg.src = imgSrc
 
-    var {txt, size, color} = meme.lines[meme.selectedLineIdx]
+    let txt = 'Text 1'
+    let size, color
 
+    if (meme.lines.length > 0) ({ txt, size, color } = meme.lines[meme.selectedLineIdx])           
+    
     elImg.onload = () => {
         coverCanvasWithImg(elImg)
-        drawText(txt, gElCanvas.width / 2, 10, color, size, 'top')
+        drawText(txt, gElCanvas.width / 2, 10, color, size)
     }
-
+    
     renderTxtEdit()
 }
 
@@ -32,7 +35,7 @@ function coverCanvasWithImg(elImg) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function drawText(text, x, y, txtColor='black', txtSize=30, baseline='middle') {
+function drawText(text, x, y, txtColor='black', txtSize=30) {
 	gCtx.lineWidth = 2
 	gCtx.strokeStyle = txtColor
 
@@ -40,7 +43,7 @@ function drawText(text, x, y, txtColor='black', txtSize=30, baseline='middle') {
 
 	gCtx.font = txtSize + 'px Arial'
 	gCtx.textAlign = 'center'
-	gCtx.textBaseline = baseline
+	gCtx.textBaseline = 'top'
 
 	gCtx.fillText(text, x, y)
 	gCtx.strokeText(text, x, y)
@@ -48,10 +51,12 @@ function drawText(text, x, y, txtColor='black', txtSize=30, baseline='middle') {
 
 function renderTxtEdit() {
     const meme = getMeme()
-    const txt = meme.lines[meme.selectedLineIdx].txt
+    let txt = 'Text 1'
+    
+    if (meme.lines.length > 0) txt = meme.lines[meme.selectedLineIdx].txt
 
     const elTxtEdit = document.querySelector('.txt-edit')
-    elTxtEdit.value = txt
+    if (txt) elTxtEdit.value = txt
 }
 
 function handleTxtEdit(event) {
