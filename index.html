@@ -9,7 +9,13 @@
 <body onload="onInit()">
     <header>Meme Generator</header>
     <section class="editor">
-        <canvas height="400"></canvas>
+        <div class="canvas-container">            
+            <canvas height="400"></canvas>
+        </div>
+
+        <div class="meme-editor">
+            <input type="text" class="txt-edit" placeholder="Meme text" oninput="handleTxtEdit(event)">
+        </div>
     </section>  
     <section class="gallery"></section> 
 

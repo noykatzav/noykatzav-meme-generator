@@ -24,6 +24,8 @@ function renderMeme(imgSrc='meme-imgs/meme-imgs (square)/2.jpg') {
         coverCanvasWithImg(elImg)
         drawText(txt, gElCanvas.width / 2, 10, color, size, 'top')
     }
+
+    renderTxtEdit()
 }
 
 function coverCanvasWithImg(elImg) {
@@ -43,4 +45,26 @@ function drawText(text, x, y, txtColor='black', txtSize=30, baseline='middle') {
 
 	gCtx.fillText(text, x, y)
 	gCtx.strokeText(text, x, y)
+}
+
+function renderTxtEdit() {
+    const meme = getMeme()
+    const txt = meme.lines[meme.selectedLineIdx].txt
+
+    const elTxtEdit = document.querySelector('.txt-edit')
+    elTxtEdit.value = txt
+}
+
+function handleTxtEdit(event) {
+    const txt = event.target.value
+    
+    setLineTxt(txt)
+    renderMeme()
+}
+
+function resizeCanvas() {
+	const elContainer = document.querySelector('.canvas-container')
+
+	gElCanvas.width = elContainer.offsetWidth
+	gElCanvas.height = elContainer.offsetHeight
 }

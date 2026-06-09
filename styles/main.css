@@ -7,14 +7,14 @@ body {
     text-align: center;
 }
 
-.canvas-container {
-    width: 80vw;
-    margin: 10px auto;
-}
-  
 canvas {
     /* display: block; */
     background-color: white;
+}
+
+.editor {
+    display: grid;
+    grid-auto-flow: column;
 }
 
 
