@@ -2,11 +2,14 @@
 let gElCanvas
 let gCtx 
 
+const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     
+    addListeners()
+
     renderMeme()
     renderEdit()
 }
@@ -29,7 +32,7 @@ function renderMeme() {
         //render text
         meme.lines.reduce((acc, line, idx)=> { 
             // let x, y
-            let { txt, size, color, x, y, width, height} = line
+            let { txt, size, color, x, y} = line
             var isSelected = meme.selectedLineIdx===idx
             
             if (!y) {
@@ -38,14 +41,9 @@ function renderMeme() {
             }
             
             let { textWidth, textHeight} = drawTextLine(txt, x, y, color, isSelected, size)
+            setLineBounds(idx, textWidth, textHeight)
             
-            if (!width || !height) {
-                width = textWidth
-                height = textHeight
-                setLineBounds(idx, width, height)
-            }
-            
-            acc = y + height + 10
+            acc = y + textHeight + 10
             if (acc >= gElCanvas.width) acc = 10
 
             return acc
@@ -54,13 +52,52 @@ function renderMeme() {
     }
 }
 
+function renderEdit() {
+    const meme = getMeme()
+    const selectedLineIdx = meme.selectedLineIdx
+
+    if (selectedLineIdx < 0) {
+        clearEdit()
+        return 
+    }
+    
+    const {txt, color} = meme.lines[selectedLineIdx]
+    
+    const elTxtInput = document.querySelector('.txt-edit')
+    const elTxtColor = document.querySelector('[name="txt-color"]')
+    
+    elTxtInput.value = txt
+    elTxtColor.value = color
+}
+
+function clearEdit() {
+    const elTxtInput = document.querySelector('.txt-edit')
+    const elTxtColor = document.querySelector('[name="txt-color"]')
+
+    elTxtInput.value = 'Meme text'
+    elTxtColor.value = '#000000'
+}
+
+function addListeners() {
+	addMouseListeners()
+	addTouchListeners()
+
+}
+
+function addMouseListeners() {
+	gElCanvas.addEventListener('click', onTextClick)
+}
+
+function addTouchListeners() {
+	gElCanvas.addEventListener('touchstart', onTextClick)
+}
 
 function coverCanvasWithImg(elImg) {
     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function drawTextLine(text, x, y, txtColor='black', isSelected=false, txtSize=30) {
+function drawTextLine(text, x, y, txtColor='#000000', isSelected=false, txtSize=30) {
 	gCtx.lineWidth = 1
     
 	gCtx.fillStyle = txtColor
@@ -89,16 +126,19 @@ function drawTextLine(text, x, y, txtColor='black', isSelected=false, txtSize=30
     return { textWidth , textHeight }
 }
 
-function renderEdit() {
-    const meme = getMeme()
-    
-    const {txt, color} = meme.lines[meme.selectedLineIdx]
+function onTextClick(ev) {
+    let selectedLineIdx = -1
+	
+    const pos = getEvPos(ev)
+    let clickedLinePos = getClickedLine(pos)
 
-    const elTxtInput = document.querySelector('.txt-edit')
-    const elTxtColor = document.querySelector('[name="txt-color"]')
+
+    if (clickedLinePos !== undefined) selectedLineIdx = clickedLinePos
     
-    elTxtInput.value = txt
-    elTxtColor.value = color
+    setSelectedLineIdx(selectedLineIdx)
+
+    renderMeme()
+    renderEdit()
 }
 
 function handleTxtEdit(event) {
@@ -154,4 +194,28 @@ function resizeCanvas() {
 
 	gElCanvas.width = elContainer.offsetWidth
 	gElCanvas.height = elContainer.offsetHeight
+}
+
+function getEvPos(ev) {
+    // Check if it is a touch event
+    if (TOUCH_EVENTS.includes(ev.type)) {
+        ev.preventDefault() // Stop double-firing mouse fallback events
+        
+        const touch = ev.targetTouches[0]
+        
+        // Get the absolute position of the canvas on the screen
+        const rect = gElCanvas.getBoundingClientRect()
+        
+        // Subtract canvas screen coordinates from touch screen coordinates
+        return {
+            x: touch.clientX - rect.left,
+            y: touch.clientY - rect.top,
+        }
+    } else {
+        // Desktop mouse tracking stays lightweight
+        return {
+            x: ev.offsetX,
+            y: ev.offsetY,
+        }
+    }
 }
