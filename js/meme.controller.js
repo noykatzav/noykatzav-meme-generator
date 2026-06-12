@@ -28,18 +28,32 @@ function renderMeme() {
 
         //render text
         meme.lines.reduce((acc, line, idx)=> { 
-            let { txt, size, color } = line
-
+            // let x, y
+            let { txt, size, color, x, y, width, height} = line
             var isSelected = meme.selectedLineIdx===idx
+            
+            if (!y) {
+                y = acc
+                setLineCords(idx, x, y)
+            }
+            
+            let { textWidth, textHeight} = drawTextLine(txt, x, y, color, isSelected, size)
+            
+            if (!width || !height) {
+                width = textWidth
+                height = textHeight
+                setLineBounds(idx, width, height)
+            }
+            
+            acc = y + height + 10
+            if (acc >= gElCanvas.width) acc = 10
 
-            drawTextLine(txt, gElCanvas.width / 2, acc, color, isSelected, size)
-
-            acc += size + 20
             return acc
             
         }, 10)
     }
 }
+
 
 function coverCanvasWithImg(elImg) {
     gElCanvas.height = (elImg.naturalHeight / elImg.naturalWidth) * gElCanvas.width
@@ -50,17 +64,29 @@ function drawTextLine(text, x, y, txtColor='black', isSelected=false, txtSize=30
 	gCtx.lineWidth = 1
     
 	gCtx.fillStyle = txtColor
+	gCtx.strokeStyle = '#ffffffff'
     
 	gCtx.font = `bold ${txtSize}px Arial`
-	gCtx.textAlign = 'center'
 	gCtx.textBaseline = 'top'
     
 	gCtx.fillText(text, x, y)
+	gCtx.strokeText(text, x, y)
+
+    const metrics = gCtx.measureText(text)
+
+    const textWidth = metrics.width
+    const textHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
+    const ascent = metrics.actualBoundingBoxAscent
     
     if (isSelected) {
-        gCtx.strokeStyle = 'yellow'
-        gCtx.strokeText(text, x, y)
+        var padding = 5
+        
+        gCtx.lineWidth = 1
+        gCtx.strokeStyle = '#ffb9f6ff'
+        gCtx.strokeRect(x - padding, y - ascent - padding, textWidth + padding * 2, textHeight + padding * 2)
     }
+
+    return { textWidth , textHeight }
 }
 
 function renderEdit() {

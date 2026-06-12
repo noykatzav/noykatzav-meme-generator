@@ -6,13 +6,17 @@ var gMeme = {
     lines: [
         {
             txt: 'I sometimes eat Falafel',
-            size: 30,
-            color: 'pink'
+            size: 45,
+            color: 'pink',
+            x: 10,
+            y: 0
         },
         {
             txt: 'Thats funny',
-            size: 20,
-            color: 'black'
+            size: 30,
+            color: 'black', 
+            x: 10,
+            y: 0
         }
     ]
 }
@@ -23,11 +27,10 @@ function getMeme() {
     return gMeme
 }
 
-function addLine(txt, color='black', size=30) {
+function addLine(txt, color = 'black', size = 30, x = 10, y = 0) {
     if (!txt) txt = `Text ${gMeme.lines.length + 1}`
 
-    gMeme.lines.push({txt, size, color})
-    console.log(gMeme.lines)
+    gMeme.lines.push({txt, size, color, x, y})
 }
 
 function setSelectedLineIdx(lineIdx) {
@@ -46,6 +49,16 @@ function setLineColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
+function setLineCords(lineIdx=gMeme.selectedLineIdx, x, y) {
+    gMeme.lines[lineIdx].x = x
+    gMeme.lines[lineIdx].y = y
+}
+
+function setLineBounds(lineIdx=gMeme.selectedLineIdx, width, height) {
+    gMeme.lines[lineIdx].width = width
+    gMeme.lines[lineIdx].height = height
+}
+
 function setImg(imgId=1) {
     gMeme = {
         selectedImgId: imgId,
@@ -53,8 +66,10 @@ function setImg(imgId=1) {
         lines: [
             {
                 txt: 'Text 1',
-                size: 20,
-                color: 'blue'
+                size: 45,
+                color: 'blue',
+                x: 10,
+                y: 0
             }   
         ]
     }    
