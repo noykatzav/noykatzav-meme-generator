@@ -22,6 +22,8 @@ var gMeme = {
 }
 var gKeywordSearchCountMap = {'funny': 0,'cat': 0, 'baby': 0}
 
+saveMeme()
+
 
 function getMeme() {
     return gMeme
@@ -91,6 +93,7 @@ function setImg(imgId=1) {
                 y: 0
             }   
         ]
-    }    
+    } 
+    saveMeme()
 }
 

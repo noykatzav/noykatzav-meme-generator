@@ -49,7 +49,10 @@ function renderMeme() {
             return acc
             
         }, 10)
+
+        saveMeme()
     }
+
 }
 
 function renderEdit() {
