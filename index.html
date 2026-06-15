@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/b1f6c4120f.js" crossorigin="anonymous"></script>
+
     <title>Meme Generator</title>                                 
 </head>
 <body onload="onInit()">
-    <header>Meme Generator
-        <button class="toggle-view" onclick="onToggleSections()">Editor</button>
+    <header>
+        <a> Meme Generator</a>
+        <nav class="main-nav">
+            <ul class="clean-list flex">
+                <li><a href="#" class="toggle-view chosen" onclick="onToggleSections()">Gallery</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
     </header>
     <section class="editor hidden">
-        <div class="canvas-container">            
+        <div class="canvas-container box-style">            
             <canvas height="400"></canvas>
-            <a href="#" class="download-meme" onclick="onDownloadMeme(this)" download="my-meme.jpg">Download Meme</a>
         </div>
         
-        <div class="meme-editor">
-            <input type="text" class="txt-edit" placeholder="Meme text" oninput="handleTxtEdit(event)">
-            <input type="color" id="txt-color" name="txt-color" value="#000000" oninput="onTxtColorChange(this.value)"/>
-            <button class="increase-txt" onclick="onIncreaseTxt()">A+</button>
-            <button class="decrease-txt" onclick="onDecreaseTxt()">A-</button>
-            <button class="add-line" onclick="onAddLine()">Add Line</button>
-            <button class="next-line" onclick="onNextLine()">Next Line</button>
+        <div class="meme-editor box-style">
+            <input type="text" class="txt-edit style-3d" placeholder="Meme text" oninput="handleTxtEdit(event)">
+            <div class="line-formatting">
+                <button class="add-line style-3d" onclick="onAddLine()">+</button>
+                <button class="next-line style-3d" onclick="onNextLine()">⇆</button>
+                <button class="delete-line style-3d">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+            
+            <div class="text-formatting">
+                <button class="increase-txt" onclick="onIncreaseTxt()">A+</button>
+                <button class="decrease-txt" onclick="onDecreaseTxt()">A-</button>
+                <button>L</button>
+                <button>C</button>
+                <button>R</button>
 
+                <button class="impact">IMPACT v</button>
+                <button>S</button>
+                <input type="color" id="txt-color" name="txt-color" value="#000000" oninput="onTxtColorChange(this.value)"/>
+            </div>
+            
+            <div class="export-meme">
+                <button class="share">Share</button>
+                <a href="#" class="download-meme" onclick="onDownloadMeme(this)" download="my-meme.jpg">Download Meme</a>
+            </div>
         </div>
         
     </section>  
@@ -42,11 +69,14 @@
             var elGalleryToggle = document.querySelector('.gallery').classList.toggle('hidden')
             var elEditorToggle = document.querySelector('.editor').classList.toggle('hidden')
             const elToggleView = document.querySelector('.toggle-view')
-            
+
             if (elGalleryToggle) {
-                elToggleView.innerText = 'Gallery'
+                if (elToggleView.classList.contains('chosen')) elToggleView.classList.remove('chosen')
                 onInit()
-            } else elToggleView.innerText = 'Editor'
+                
+            } else {
+                if (!elToggleView.classList.contains('chosen')) elToggleView.classList.add('chosen')
+            }
         }
     </script>
 

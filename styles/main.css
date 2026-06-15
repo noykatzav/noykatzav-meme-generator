@@ -20,7 +20,6 @@ body {
 
 .meme-editor {
     display: grid;
-    gap: 5px;
 }
 
 .canvas-container {

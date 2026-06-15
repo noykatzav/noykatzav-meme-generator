@@ -1,0 +1,36 @@
+.flex {
+    display: flex;
+}
+.hidden {
+    display: none !important;
+}
+
+.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chosen {
+    background-color: #EBEEF3;
+    color: var(--clr-third-base);
+    box-shadow: 0 2px 6px var(--clr-shadow);
+    padding: .25rem 1.3rem;
+}
+
+.style-3d {
+    background-color: #EBEEF3;
+    color: var(--clr-primary-base);
+    border: none;
+    border-radius: 10px;
+
+    box-shadow: inset 0 .2em 0 rgba(255, 255, 255, 0.9)
+        ,inset 0 -3px 3px rgba(0, 0, 0, 0.06)
+        , 0 .3em 0 var(--clr-light-shadow);
+}
+
+.box-style {
+    background-color: var(--clr-transparent-bg);
+    box-shadow: 0 2px 6px var(--clr-shadow);
+    border-radius: 20px;
+}

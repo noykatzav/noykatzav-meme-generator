@@ -1,0 +1,25 @@
+.main-nav {
+    display: none;
+}
+
+/* Tablet */
+
+@media (min-width: 500px) {
+
+    .main-nav {
+        display: flex;
+   }
+}
+
+/* Desktop */
+
+@media (min-width: 800px) {
+    .editor {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+    }
+
+    .main-nav > ul {
+        gap: 6.5rem;
+    }
+}

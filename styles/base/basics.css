@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'poppins-medium', sans-serif;
+    line-height: 20px;
+}
+
+body {
+    display: grid;
+    gap: 1.5rem;
+    background-color: var(--clr-primary-base);
+}
+
+header {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 6.5rem;
+
+    text-align: start;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+
+    background: linear-gradient(90deg, var(--clr-secondary-base), var(--clr-forth-base));
+
+    height: 76px;
+    border-radius: 50px;
+    padding: 2rem 7.5rem;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+i {
+    color: white;
+}
+
+button {
+    font-family: 'poppins-semibold';
+}
+
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #EBEEF3;
+}
+
+input {
+    font-family: 'poppins-medium', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+}
+
+canvas {
+    max-width: 100%;
+
+    background-color: white;
+    border-radius: 20px;
+}

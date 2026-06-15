@@ -1,0 +1,9 @@
+:root {
+    --clr-primary-base: #22252C; 
+    --clr-secondary-base: #058fb1;
+    --clr-third-base: #299691;
+    --clr-forth-base: #24bf77;
+    --clr-shadow: rgba(0, 0, 0, 0.3);
+    --clr-light-shadow: rgba(221, 221, 221, 0.757);
+    --clr-transparent-bg: #c8d1de29;
+}
