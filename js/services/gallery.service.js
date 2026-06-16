@@ -1,4 +1,5 @@
 'use strict'
+
 const gImgs = [
     { id: 1, url: 'meme-imgs/meme-imgs (square)/1.jpg', keywords: [] },
     { id: 2, url: 'meme-imgs/meme-imgs (square)/2.jpg', keywords: [] },

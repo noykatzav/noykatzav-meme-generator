@@ -2,6 +2,7 @@
 
 renderGallery()
 
+
 function renderGallery() {
     const imgs = getImgs()
 

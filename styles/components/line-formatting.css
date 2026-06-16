@@ -1,0 +1,29 @@
+.line-formatting {
+    justify-self: center;
+
+    display: grid;
+    grid-auto-flow: column;
+    gap: .75rem;
+}
+
+.line-formatting .add-line {
+    background-color: #3cccda;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.127),
+        inset 0 3px 0 #69e5f0,
+        inset 0 -3px 0px #048B97;
+}
+
+.line-formatting .next-line {
+    background-color: #09e260;    
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.127),
+        inset 0 3px 0 #5ceeac,
+        inset 0 -3px 0px #015D33;
+}
+
+.line-formatting .delete-line {
+    background-color: #ec0808;
+    box-shadow: 0 2px 0 #8C0606;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.127),
+        inset 0 3px 0 #f06464,
+        inset 0 -3px 0px #8C0606;
+}

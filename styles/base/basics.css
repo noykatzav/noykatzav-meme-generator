@@ -7,28 +7,6 @@ html {
     line-height: 20px;
 }
 
-body {
-    display: grid;
-    gap: 1.5rem;
-    background-color: var(--clr-primary-base);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    text-align: start;
-    font-size: 1.25rem;
-    color: #FFFFFF;
-
-    background: linear-gradient(90deg, var(--clr-secondary-base), var(--clr-forth-base));
-
-    height: 10vh;
-    border-radius: 50px;
-    padding: 2rem;
-}
-
 img {
     width: 100%;
     height: 100%;

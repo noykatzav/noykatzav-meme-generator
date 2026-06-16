@@ -7,5 +7,14 @@
 @import url(base/helpers.css);
 @import url(base/layout.css);
 
+/* COMPONENTS */
+@import url(components/gallery.css);
+@import url(components/editor.css);
+@import url(components/main-header.css);
+@import url(components/meme-editor.css);
+@import url(components/text-formatting.css);
+@import url(components/line-formatting.css);
+@import url(components/toggle-buttons.css);
+
 /* mq */
 @import url(setup/mq.css);

@@ -1,0 +1,14 @@
+.editor {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3rem;
+
+    margin-inline: 1rem;
+}
+
+.editor .canvas-container {
+    display: grid;
+    
+    padding: .5rem;
+}

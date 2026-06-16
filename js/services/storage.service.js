@@ -1,5 +1,7 @@
 'use strict'
+
 const MEME_STORAGE_KEY = 'meme'
+
 
 function fetchMeme() {
     const memeLoc = localStorage.getItem(MEME_STORAGE_KEY)

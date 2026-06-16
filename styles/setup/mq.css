@@ -29,11 +29,13 @@
     }
     
 }
+
+
 /* Tablet */
 
 @media (min-width: 500px) {
 
-    header { 
+    .main-header { 
         gap: 6.5rem;
         
         padding: 1rem 5rem;
@@ -43,6 +45,7 @@
         display: flex;
     }
 }
+
 
 /* Desktop */
 
