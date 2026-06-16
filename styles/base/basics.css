@@ -14,10 +14,9 @@ body {
 }
 
 header {
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 6.5rem;
 
     text-align: start;
     font-size: 1.25rem;
@@ -25,9 +24,9 @@ header {
 
     background: linear-gradient(90deg, var(--clr-secondary-base), var(--clr-forth-base));
 
-    height: 76px;
+    height: 10vh;
     border-radius: 50px;
-    padding: 2rem 7.5rem;
+    padding: 2rem;
 }
 
 img {
