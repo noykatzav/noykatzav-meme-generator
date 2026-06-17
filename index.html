@@ -78,10 +78,11 @@
             if (elGalleryToggle) {
                 if (elToggleView.classList.contains('chosen')) elToggleView.classList.remove('chosen')
                 onInit()
-                
             } else {
                 if (!elBody.classList.contains('menu-open') &&  !elToggleView.classList.contains('chosen')) elToggleView.classList.add('chosen')
             }
+            
+            if (elBody.classList.contains('menu-open')) elBody.classList.remove('menu-open')
         }
     
         function onToggleMenu() {
